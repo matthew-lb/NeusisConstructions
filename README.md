@@ -15,7 +15,7 @@ CurvePoints (yellow points) - points which liee on a specific curve. The user ca
 
 IntersectionPoints (red points) - points which are defined as the intersection of 2 curves.
 
-RadialCircles - circles that are defined by a point chosen to be itâ€™s center and another selected to be on the curve. 
+RadialCircles - circles that are defined by a point chosen to be it's center and another selected to be on the curve. 
 
 ThreePointCircle - circles defined by 3 points selected on it.
 
@@ -30,24 +30,24 @@ To run the code just open Sketch.pde in the folder Sketch and press the run butt
 
 When the user places the mouse over different objects they will change color and/or become lighter to indicate that they have currently been selected. When the mouse is pressed/dragged over selected objects they will do different things based on what mode the code is in. The user can switch between modes using different keys. A description of each mode (and the key that needs to be pressed to switch into that mode) are below:
 
-1. select (key == '€™s'€™): In this mode the user can drag black points (MovePoints) around the screen and yellow points (CurvePoints) around the curve they belong to and see how it changes other objects on the screen
+1. select (key == 's'): In this mode the user can drag black points (MovePoints) around the screen and yellow points (CurvePoints) around the curve they belong to and see how it changes other objects on the screen
 
-2. placePoint (key == 'p'™): In this mode the user can place new points on the screen. If an existing point is selected nothing will happen. If no objects are selected a new black point (MovePoint) will be created. If one object is selected a yellow point (CurvePoint) will be created on that curve. If 2 objects are selected a red point (IntersectionPoint) will be created at the intersection of those 2 curves.
+2. placePoint (key == 'p'): In this mode the user can place new points on the screen. If an existing point is selected nothing will happen. If no objects are selected a new black point (MovePoint) will be created. If one object is selected a yellow point (CurvePoint) will be created on that curve. If 2 objects are selected a red point (IntersectionPoint) will be created at the intersection of those 2 curves.
 
-3. placeLine (key == 'l'€™): In this mode the user selects 2 points and segment is drawn between them.
+3. placeLine (key == 'l'): In this mode the user selects 2 points and segment is drawn between them.
 
 4. infLine (key == 'i'): In this mode the user selects points and an infinite line is drawn between them.
 
-5. radialCircle (key == â€˜râ€™): In this mode the user first selects a point to be the center of the circle and then selects a second point on the circle. A circle is then drawn accordingly.
+5. radialCircle (key == 'r'): In this mode the user first selects a point to be the center of the circle and then selects a second point on the circle. A circle is then drawn accordingly.
 
-6. circumCircle (key == '€˜c'€™): In this mode the user selects 3 points and the circle which passes through those 3 points is drawn.
+6. circumCircle (key == 'c'): In this mode the user selects 3 points and the circle which passes through those 3 points is drawn.
 
-7. remove (key == 'd'€™): In this mode any selected object which the user clicks is deleted. (Note: Any objects which are defined based upon the deleted object in some way are also deleted).
+7. remove (key == 'd'): In this mode any selected object which the user clicks is deleted. (Note: Any objects which are defined based upon the deleted object in some way are also deleted).
 
-8. hide (key == '€˜h'€™): In this mode any object which the user selects is hidden from view (Note: This is useful for when you donâ€™t want to see an object, but want to see somethings that are defined based upon it).
+8. hide (key == 'h' ): In this mode any object which the user selects is hidden from view (Note: This is useful for when you don't want to see an object, but want to see somethings that are defined based upon it).
 
 
-In addition to having several modes the user can undo an operation by pressing the key 'u' and redo an operation by pressing the key '€˜e'€™.
+In addition to having several modes the user can undo an operation by pressing the key 'u' and redo an operation by pressing the key 'e'.
 
 ## To Do
 - [] Improve Comments
