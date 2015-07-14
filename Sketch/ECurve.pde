@@ -1,0 +1,3 @@
+class ECurve extends EObject {
+  
+}
