@@ -11,18 +11,24 @@
   */
   
   float convX(float x) {
-    return (width/2 - x);
+    return (width/2 - (x-xshift)*scale);
   }
   
   float convY(float y) {
+    return (height/2 - (y-yshift)*scale);
+  }
+  
+  float disX(float x) {
+    return (width/2 - x);
+  }
+  
+  float disy(float y) {
     return (height/2 - y);
   }
   
   boolean onScreen(float x, float y) {
-    return ((x >= 0) && (x <= width) && (y >= 0) && ( y <= height));
+    return ((x >= 0) && (x <= width/scale) && (y >= 0) && ( y <= height/scale));
   }
-  
-  
   
   
   /* Distance Functions

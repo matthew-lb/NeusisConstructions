@@ -26,13 +26,17 @@ float selectedPointy = 0;
 ArrayList<ECurve> selectedObjects = new ArrayList<ECurve>();
 ArrayList<EPoint> cPoints = new ArrayList<EPoint>();
 String mode;
+float scale = 1.0; 
+float xshift = 0.0;
+float yshift = 0.0;
 
 void setup(){
     size(800,800);
     background(255);
     points.add(new EPoint(0,0,""));
-    points.get(0).hide();
+    //points.get(0).hide();
     mode = "select";
+    frame.setResizable(true);
 }
 
 void draw() {
@@ -63,7 +67,7 @@ void mouseDragged() {
     if (selectedPoint instanceof MovePoint) {
       if ((mouseX >= 0) && (mouseX <= width))
         selectedPoint.setX(convX(mouseX));
-      if ((mouseY >= 0) && (mouseX <= height))
+      if ((mouseY >= 0) && (mouseY <= height))
         selectedPoint.setY(convY(mouseY));
     }
     else if (selectedPoint instanceof CurvePoint) {
@@ -215,6 +219,18 @@ void keyPressed() {
         redo.pop().redo();
         cPoints = new ArrayList<EPoint>();
       }
+    }
+    if (key == '=') {
+      println(convX(mouseX));
+      println(convY(mouseY));
+      xshift += (1-1/1.2)*((width/2 - mouseX)-xshift);
+      yshift += (1-1/1.2)*((height/2 - mouseY)-yshift);
+      scale *= 1.2;
+    }
+    if (key == '-') {
+      xshift += (1-1/1.2)*((width/2 - mouseX)-xshift);
+      yshift += (1-1/1.2)*((height/2 - mouseY)-yshift);
+      scale /= 1.2;
     }
   }
 }

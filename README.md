@@ -50,11 +50,11 @@ When the user places the mouse over different objects they will change color and
 In addition to having several modes the user can undo an operation by pressing the key 'u' and redo an operation by pressing the key 'e'.
 
 ## To Do
-- [] Improve Comments
-- [] Write class for constructing and drawing neusis 
-- [] Code intersections between neusis and other curves
-- [] Write guides to constructions
-- [] Do Something with the names feature
+- [ ] Improve comments
+- [ ] Write class for constructing and drawing neusis 
+- [ ] Code intersections between Neusis and other curves
+- [ ] Write guides to constructions
+- [ ] Do something with the names feature
  
 ## Bugs / Possible Issues / Comments:
 
