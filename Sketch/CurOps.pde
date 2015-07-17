@@ -10,6 +10,15 @@
       convY(float y) - converts regular ordinate to processing ordinate
   */
   
+  
+  float inputX(float x) {
+    return (width/2 - x)/scale + xshift;
+  }
+  
+  float inputY(float y) {
+    return (height/2 - y)/scale + yshift;
+  }
+  
   float convX(float x) {
     return (width/2 - (x-xshift)*scale);
   }
@@ -22,7 +31,7 @@
     return (width/2 - x);
   }
   
-  float disy(float y) {
+  float disY(float y) {
     return (height/2 - y);
   }
   

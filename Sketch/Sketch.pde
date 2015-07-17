@@ -15,6 +15,8 @@
        
 */
 
+final float SCALE_FACTOR = 1.2;
+
 Stack<Act> undo = new Stack<Act>();
 Stack<Act> redo = new Stack<Act>();
 ArrayList<EPoint> points = new ArrayList<EPoint>();
@@ -66,12 +68,12 @@ void mouseDragged() {
   else if (mode == "select") {
     if (selectedPoint instanceof MovePoint) {
       if ((mouseX >= 0) && (mouseX <= width))
-        selectedPoint.setX(convX(mouseX));
+        selectedPoint.setX(inputX(mouseX));
       if ((mouseY >= 0) && (mouseY <= height))
-        selectedPoint.setY(convY(mouseY));
+        selectedPoint.setY(inputY(mouseY));
     }
     else if (selectedPoint instanceof CurvePoint) {
-      selectedPoint.setXY(convX(mouseX), convY(mouseY));
+      selectedPoint.setXY(inputX(mouseX), inputY(mouseY));
     }
   }
 }
@@ -223,14 +225,14 @@ void keyPressed() {
     if (key == '=') {
       println(convX(mouseX));
       println(convY(mouseY));
-      xshift += (1-1/1.2)*((width/2 - mouseX)-xshift);
-      yshift += (1-1/1.2)*((height/2 - mouseY)-yshift);
-      scale *= 1.2;
+      xshift += (1-1/SCALE_FACTOR)*((width/2 - mouseX)-xshift);
+      yshift += (1-1/SCALE_FACTOR)*((height/2 - mouseY)-yshift);
+      scale *= SCALE_FACTOR;
     }
     if (key == '-') {
-      xshift += (1-1/1.2)*((width/2 - mouseX)-xshift);
-      yshift += (1-1/1.2)*((height/2 - mouseY)-yshift);
-      scale /= 1.2;
+      xshift += (1 - SCALE_FACTOR)*((width/2 - mouseX)-xshift);
+      yshift += (1 - SCALE_FACTOR)*((height/2 - mouseY)-yshift);
+      scale /= SCALE_FACTOR;
     }
   }
 }
@@ -242,9 +244,9 @@ void setSelected() {
   for (int i = 0; i < points.size(); i++) {
     points.get(i).unselect();
     if (!points.get(i).hide && points.get(i).exists) {
-      if (distance(convX(mouseX),convY(mouseY),points.get(i)) < 12 && distance(convX(mouseX),convY(mouseY),points.get(i)) < minDist) {
+      if (distance(inputX(mouseX),inputY(mouseY),points.get(i)) < 12/scale && distance(inputX(mouseX),inputY(mouseY),points.get(i)) < minDist) {
         index = i;
-        minDist = distance(mouseX,mouseY,points.get(i));
+        minDist = distance(inputX(mouseX),inputY(mouseY),points.get(i));
       } 
     }
   }
@@ -257,7 +259,7 @@ void setSelected() {
   for (int i = 0; i < circles.size(); i++) {
     circles.get(i).unselect();
     if (!circles.get(i).hide && circles.get(i).exists && index == -1) {
-      if (distance(convX(mouseX),convY(mouseY),circles.get(i)) < 2) {
+      if (distance(inputX(mouseX),inputY(mouseY),circles.get(i)) < 2) {
         selectedObjects.add(circles.get(i));
         circles.get(i).select();
       } 
@@ -266,7 +268,7 @@ void setSelected() {
   for (int i = 0; i < lines.size(); i++) {
     lines.get(i).unselect();
     if (!lines.get(i).hide && lines.get(i).exists && index == -1) {
-      if (distance(convX(mouseX),convY(mouseY),lines.get(i)) < 2) {
+      if (distance(inputX(mouseX),inputY(mouseY),lines.get(i)) < 2) {
         selectedObjects.add(lines.get(i));
         lines.get(i).select();
       } 
@@ -276,16 +278,16 @@ void setSelected() {
 
 void placePoint() {
    if (selectedObjects.size() == 0) {
-     points.add(new MovePoint(convX(mouseX),convY(mouseY),""));
+     points.add(new MovePoint(inputX(mouseX),inputY(mouseY),""));
      undo.push(new Add(points.get(points.size() - 1)));
    }
    if (selectedObjects.size() == 1) {
-     points.add(new CurvePoint(convX(mouseX),convY(mouseY),selectedObjects.get(0),""));
+     points.add(new CurvePoint(inputX(mouseX),inputY(mouseY),selectedObjects.get(0),""));
      undo.push(new Add(points.get(points.size() - 1)));
    }
    if (selectedObjects.size() >= 2) {
      if (intersection(selectedObjects.get(0),selectedObjects.get(1)) != null) {
-       points.add(new IntersectionPoint(selectedObjects.get(0),selectedObjects.get(1),convX(mouseX),convY(mouseY),""));
+       points.add(new IntersectionPoint(selectedObjects.get(0),selectedObjects.get(1),disX(mouseX),disY(mouseY),""));
        undo.push(new Add(points.get(points.size() - 1)));
      }
    }

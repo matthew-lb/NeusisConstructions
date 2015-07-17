@@ -47,7 +47,7 @@ class ECircle extends ECurve {
       } else {
         stroke(0);
       }
-      ellipse(convX(center.xpos), convY(center.ypos), 2*radius, 2*radius);
+      ellipse(convX(center.xpos), convY(center.ypos), 2*radius*scale, 2*radius*scale);
     }
   }
   
