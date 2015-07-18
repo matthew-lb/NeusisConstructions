@@ -19,15 +19,19 @@ final float SCALE_FACTOR = 1.2;
 
 Stack<Act> undo = new Stack<Act>();
 Stack<Act> redo = new Stack<Act>();
+
 ArrayList<EPoint> points = new ArrayList<EPoint>();
 ArrayList<ELine> lines = new ArrayList<ELine>();
 ArrayList<ECircle> circles = new ArrayList<ECircle>();
+
 EPoint selectedPoint = new EPoint();
 float selectedPointx = 0;
 float selectedPointy = 0;
 ArrayList<ECurve> selectedObjects = new ArrayList<ECurve>();
 ArrayList<EPoint> cPoints = new ArrayList<EPoint>();
+
 String mode;
+
 float scale = 1.0; 
 float xshift = 0.0;
 float yshift = 0.0;
@@ -74,6 +78,10 @@ void mouseDragged() {
     }
     else if (selectedPoint instanceof CurvePoint) {
       selectedPoint.setXY(inputX(mouseX), inputY(mouseY));
+    }
+    else if (selectedPoint == null && selectedObjects.size() == 0) {
+      xshift += inputX(pmouseX) - inputX(mouseX);
+      yshift += inputY(pmouseY) - inputY(mouseY) ;
     }
   }
 }
@@ -223,15 +231,13 @@ void keyPressed() {
       }
     }
     if (key == '=') {
-      println(convX(mouseX));
-      println(convY(mouseY));
-      xshift += (1-1/SCALE_FACTOR)*((width/2 - mouseX)-xshift);
-      yshift += (1-1/SCALE_FACTOR)*((height/2 - mouseY)-yshift);
+      xshift += (1-1/SCALE_FACTOR)*(inputX(mouseX)-xshift);
+      yshift += (1-1/SCALE_FACTOR)*(inputY(mouseY)-yshift);
       scale *= SCALE_FACTOR;
     }
     if (key == '-') {
-      xshift += (1 - SCALE_FACTOR)*((width/2 - mouseX)-xshift);
-      yshift += (1 - SCALE_FACTOR)*((height/2 - mouseY)-yshift);
+      xshift += (1 - SCALE_FACTOR)*(inputX(mouseX)-xshift);
+      yshift += (1 - SCALE_FACTOR)*(inputY(mouseY)-yshift);
       scale /= SCALE_FACTOR;
     }
   }
@@ -287,7 +293,7 @@ void placePoint() {
    }
    if (selectedObjects.size() >= 2) {
      if (intersection(selectedObjects.get(0),selectedObjects.get(1)) != null) {
-       points.add(new IntersectionPoint(selectedObjects.get(0),selectedObjects.get(1),disX(mouseX),disY(mouseY),""));
+       points.add(new IntersectionPoint(selectedObjects.get(0),selectedObjects.get(1),inputX(mouseX),inputY(mouseY),""));
        undo.push(new Add(points.get(points.size() - 1)));
      }
    }

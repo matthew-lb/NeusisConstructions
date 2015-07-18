@@ -36,7 +36,7 @@
   }
   
   boolean onScreen(float x, float y) {
-    return ((x >= 0) && (x <= width/scale) && (y >= 0) && ( y <= height/scale));
+    return ((x >= 0) && (x <= width) && (y >= 0) && ( y <= height));
   }
   
   
